@@ -17,8 +17,8 @@ import org.junit.runner.RunWith;
         strict = false,
         features = {"src/test/resources"},
         snippets = SnippetType.CAMELCASE,
-        glue = {"com.live.magento.step-definitions",""}
-       // tags = {"@Regression"}
+        glue = {"org.wikipedia.app",""},
+        tags = {"@regression"}
 
 
 )
