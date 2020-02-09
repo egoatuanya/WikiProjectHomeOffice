@@ -1,11 +1,15 @@
 package org.wikipedia.app.steps;
 
+import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion;
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.wikipedia.app.pages.BasePage;
 import org.wikipedia.app.pages.HomePage;
+import org.wikipedia.app.pages.SearchResultPage;
 import org.wikipedia.app.support.WorldHelper;
 import org.wikipedia.app.utilities.Settings;
 
@@ -15,6 +19,7 @@ public class SearchSteps {
     private WorldHelper helper;
     private BasePage basePage;
     private HomePage landingPage;
+    private SearchResultPage searchResultPage;
 
     public SearchSteps(WorldHelper helper){this.helper = helper;}
 
@@ -29,7 +34,7 @@ public class SearchSteps {
     public void iShouldBeAbleToSeeTheDefaultLanguageIs(String language)
     {
         language = Settings.getTestConfig("English.language");
-        boolean result = helper.getBasePage().goToHomePage().validateDefaultLanguage(language);
+       boolean result = landingPage.validateDefaultLanguage(language);
         Assert.assertTrue(result);
     }
 
@@ -38,7 +43,61 @@ public class SearchSteps {
     {
         value = Settings.getTestConfig("specific.value");
         landingPage.searchForSpecificValue(value);
+    }
+
+
+    @And("^I click on the submit button$")
+    public void iClickOnTheSubmitButton() {
+
+        searchResultPage = landingPage.clickOnSubmitButton();
+    }
+
+
+    @Then("^I should be able to validate the first heading of the search result page contains \"([^\"]*)\"$")
+    public void iShouldBeAbleToValidateTheFirstHeadingOfTheSearchResultPageContains(String resultHeader)  {
+        resultHeader = Settings.getTestConfig("specific.value");
+        searchResultPage.validateSearchResultPage(resultHeader);
 
     }
 
+    @And("^I should be able to verify that the search result page is available in a different \"([^\"]*)\"$")
+    public void iShouldBeAbleToVerifyThatTheSearchResultPageIsAvailableInADifferent(String otherLanguage)  {
+        otherLanguage = Settings.getTestConfig("other.language");
+        searchResultPage.verifyOtherLanguages(otherLanguage);
+
+    }
+
+
+    @Given("^I navigate back to Wikipedia Homepage$")
+    public void iNavigateBackToWikipediaHomepage() {
+        landingPage = helper.getBasePage().goToHomePage();
+
+    }
+    @When("^I select a language different from \"([^\"]*)\"$")
+    public void iSelectALanguageDifferentFrom(String otherValue)  {
+        otherValue = Settings.getTestConfig("select.otherLanguage");
+        landingPage.selectOtherLanguageSearch(otherValue);
+
+    }
+    @Then("^I should be able to search in a language different from \"([^\"]*)\"$")
+    public void iShouldBeAbleToSearchInALanguageDifferentFrom(String diffLanguageValue)  {
+        diffLanguageValue = Settings.getTestConfig("otherValue.search");
+        searchResultPage = landingPage.searchForOtherValue(diffLanguageValue).clickOnSubmitButton();
+
+    }
+
+
+
+    @And("^I should be able to validate the results page includes a link to the version in \"([^\"]*)\"$")
+    public void iShouldBeAbleToValidateTheResultsPageIncludesALinkToTheVersionIn(String englishLink)
+
+    {
+        englishLink = Settings.getTestConfig("english.link");
+        searchResultPage.verifyLinkInEnglish(englishLink);
+    }
+
+
+
 }
+
+

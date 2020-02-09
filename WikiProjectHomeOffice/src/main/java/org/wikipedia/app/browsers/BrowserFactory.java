@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 
 import org.wikipedia.app.utilities.Settings;
 
+import java.util.concurrent.TimeUnit;
+
 public class BrowserFactory {
     private static WebDriver driver;
 
@@ -44,10 +46,19 @@ public class BrowserFactory {
             driver = bsm.createRemoteBrowser();
         }
     }
+    public void prepareBrowser()
+    {
+        //driver.manage().window().setSize(new Dimension(1600,900));
+        driver.manage().window().maximize();
+        driver.manage().deleteAllCookies();
+        long globalTimeout=Long.parseLong(Settings.getTestConfig("global.time.out"));
+        driver.manage().timeouts().implicitlyWait(globalTimeout, TimeUnit.MICROSECONDS);
+    }
+
 
 
     public void deInitialiseBrowser()
     {
-        // if(driver != null) driver.quit();
+         if(driver != null) driver.quit();
     }
 }

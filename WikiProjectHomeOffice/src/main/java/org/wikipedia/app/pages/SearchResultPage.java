@@ -9,7 +9,7 @@ public class SearchResultPage extends BasePage {
     private WebElement searchResultPageHeader = null;
     @FindBy(id = "p-lang-label")
     private WebElement searchResultOtherLanguages = null;
-    @FindBy(linkText = "https://en.wikipedia.org/wiki/Pasta")
+    @FindBy(css = "#p-lang > div > ul > li.interlanguage-link.interwiki-en > a")
     private WebElement linkToVersionInEnglish = null;
 
     public SearchResultPage(WebDriver webDriver) {
