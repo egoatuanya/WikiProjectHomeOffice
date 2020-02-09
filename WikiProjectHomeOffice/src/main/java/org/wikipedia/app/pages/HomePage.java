@@ -20,12 +20,13 @@ public class HomePage extends BasePage {
     }
 
     public HomePage searchForSpecificValue(String value) {
-        TextFieldsControl.enterText(searchField, value);
+        searchField.sendKeys();
+//        TextFieldsControl.enterText(searchField, value);
         return this;
     }
 
     public boolean validateDefaultLanguage(String selectedLanguage) {
-        DropDownControl.selectDropDownByVisibleText(language, selectedLanguage);
+//        DropDownControl.selectDropDownByVisibleText(language, selectedLanguage);
         return language.getText().contains(selectedLanguage);
     }
 

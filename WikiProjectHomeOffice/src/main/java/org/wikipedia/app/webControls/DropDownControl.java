@@ -13,21 +13,21 @@ import org.openqa.selenium.support.ui.Select;
 
 public class DropDownControl extends BaseControl {
 
-        private static Logger logger = LogManager.getLogger("TestLogger");
+//        private static Logger logger = LogManager.getLogger("TestLogger");
 
 
-        public static void selectDropDownByVisibleText(WebElement element, String visibleText) {
-            for (int counter = 0; counter <= time; counter++) {
-                if (isElementDisplayed(element) && isElementEnabled(element)) {
-                    Select select = new Select(element);
-                    select.selectByVisibleText(visibleText);
-                    logger.info("Element is selected is " + visibleText);
-                    return;
-                } else {
-//                    WebWaits.waitForNoOfSeconds(2);
-                    logger.info("Wait is applied " + counter);
-                }
-            }
-        }
-    }
+//        public static void selectDropDownByVisibleText(WebElement element, String visibleText) {
+//            for (int counter = 0; counter <= time; counter++) {
+//                if (isElementDisplayed(element) && isElementEnabled(element)) {
+//                    Select select = new Select(element);
+//                    select.selectByVisibleText(visibleText);
+//                    logger.info("Element is selected is " + visibleText);
+//                    return;
+//                } else {
+////                    WebWaits.waitForNoOfSeconds(2);
+//                    logger.info("Wait is applied " + counter);
+//                }
+//            }
+//        }
+//    }
 }

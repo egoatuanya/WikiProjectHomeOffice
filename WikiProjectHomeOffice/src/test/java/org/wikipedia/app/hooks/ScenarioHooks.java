@@ -1,70 +1,103 @@
 package org.wikipedia.app.hooks;
 
 
-import org.wikipedia.app.browsers.BrowserFactory;
-import org.wikipedia.app.browsers.LocalBrowserManager;
-import org.wikipedia.app.utilities.Settings;
-import cucumber.api.Scenario;
+
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.wikipedia.app.browsers.BrowserFactory;
 
+public class ScenarioHooks {
 
-public class ScenarioHooks extends EventFiringWebDriver {
+    private BrowserFactory bf;
 
-
-    private static final WebDriver REAL_DRIVER = BrowserFactory.getDriver();
-    //private static final WebDriver REAL_DRIVER =  WebDriverFactory.create();
-    private static final Thread CLOSE_THREAD = new Thread() {
-        @Override
-        public void run() {
-            REAL_DRIVER.quit();
-        }
-    };
-
-    static {
-        int ap = Runtime.getRuntime().availableProcessors();
-        long tm = Runtime.getRuntime().totalMemory();
-        long mm = Runtime.getRuntime().maxMemory();
-        //Runtime.getRuntime().gc();
-        Runtime.getRuntime().addShutdownHook(CLOSE_THREAD);
+    //@Before(order = 1)
+    @Before(order=1)
+    public void startTest1()
+    {
+        bf = new BrowserFactory();
+        bf.initialiseBrowser();
     }
 
-    public ScenarioHooks() {
-        super(REAL_DRIVER);
-    }
-
-    @Override
-    public void quit() {
-        if (Thread.currentThread() != CLOSE_THREAD) {
-            throw new UnsupportedOperationException("You shouldn't quit this WebDriver. It's shared and will quit when the JVM exits.");
-        }
-        super.quit();
-    }
-
-    @Before(order = 2)
-    public void deleteAllCookies(Scenario scenario) {
-        manage().window().maximize();
-        manage().deleteAllCookies();
-        String baseUrl = Settings.getTestConfig("base.url");
-        navigate().to(baseUrl);
-//        WebWaits.checkPageReady();
-//        int time = Integer.parseInt(EnvConfig.getValue("default.timer"));
-//        manage().timeouts().implicitlyWait(time, TimeUnit.MICROSECONDS);
-//        WebWaits.waitForNoOfSeconds(1);
-    }
+    //@Before(order = 2)
+//    @Before(order = 2)
+//    public void startTest2()
+//    {
+//        bf.prepareBrowser();
+//    }
 
     @After
-    public void embedScreenshot(Scenario scenario) {
-        if(!scenario.isFailed()) return;
-        try {
-            byte[] screenshot = getScreenshotAs(OutputType.BYTES);
-            scenario.embed(screenshot, "image/png");
-        } catch (WebDriverException somePlatformsDontSupportScreenshots) {
-            System.err.println(somePlatformsDontSupportScreenshots.getMessage());
-        }
+    public void stopTest()
+    {
+        bf.deInitialiseBrowser();
     }
+
 }
+
+
+//import org.wikipedia.app.browsers.BrowserFactory;
+//import org.wikipedia.app.browsers.LocalBrowserManager;
+//import org.wikipedia.app.utilities.Settings;
+//import cucumber.api.Scenario;
+//import cucumber.api.java.After;
+//import cucumber.api.java.Before;
+//import org.openqa.selenium.OutputType;
+//import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.WebDriverException;
+//import org.openqa.selenium.support.events.EventFiringWebDriver;
+
+
+//public class ScenarioHooks extends EventFiringWebDriver {
+
+
+//    private static final WebDriver REAL_DRIVER = BrowserFactory.initialiseBrowser()
+//    //private static final WebDriver REAL_DRIVER =  WebDriverFactory.create();
+//    private static final Thread CLOSE_THREAD = new Thread() {
+//        @Override
+//        public void run() {
+//            REAL_DRIVER.quit();
+//        }
+//    };
+//
+//    static {
+//        int ap = Runtime.getRuntime().availableProcessors();
+//        long tm = Runtime.getRuntime().totalMemory();
+//        long mm = Runtime.getRuntime().maxMemory();
+//        //Runtime.getRuntime().gc();
+//        Runtime.getRuntime().addShutdownHook(CLOSE_THREAD);
+//    }
+//
+//    public ScenarioHooks() {
+//        super(REAL_DRIVER);
+//    }
+//
+//    @Override
+//    public void quit() {
+//        if (Thread.currentThread() != CLOSE_THREAD) {
+//            throw new UnsupportedOperationException("You shouldn't quit this WebDriver. It's shared and will quit when the JVM exits.");
+//        }
+//        super.quit();
+//    }
+//
+//    @Before(order = 2)
+//    public void deleteAllCookies(Scenario scenario) {
+//        manage().window().maximize();
+//        manage().deleteAllCookies();
+//        String baseUrl = Settings.getTestConfig("base.url");
+//        navigate().to(baseUrl);
+////        WebWaits.checkPageReady();
+////        int time = Integer.parseInt(EnvConfig.getValue("default.timer"));
+////        manage().timeouts().implicitlyWait(time, TimeUnit.MICROSECONDS);
+////        WebWaits.waitForNoOfSeconds(1);
+//    }
+//
+//    @After
+//    public void embedScreenshot(Scenario scenario) {
+//        if(!scenario.isFailed()) return;
+//        try {
+//            byte[] screenshot = getScreenshotAs(OutputType.BYTES);
+//            scenario.embed(screenshot, "image/png");
+//        } catch (WebDriverException somePlatformsDontSupportScreenshots) {
+//            System.err.println(somePlatformsDontSupportScreenshots.getMessage());
+//        }
+//    }
+

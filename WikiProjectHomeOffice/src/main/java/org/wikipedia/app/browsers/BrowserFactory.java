@@ -24,8 +24,9 @@ public class BrowserFactory {
         }else if(placeOfExec.equalsIgnoreCase("remote"))
         {
 
-            this.decideMachine();
+//            this.decideMachine();
         }
+
 
     }
 
