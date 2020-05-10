@@ -28,6 +28,10 @@ public class BrowserFactory {
 
 //            this.decideMachine();
         }
+        else if(placeOfExec.equalsIgnoreCase("browserstack")){
+            BrowserStackManager bsm = new BrowserStackManager();
+            driver = bsm.createRemoteBrowser();
+        }
 
 
     }

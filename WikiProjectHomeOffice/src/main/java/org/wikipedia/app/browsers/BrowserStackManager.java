@@ -74,10 +74,7 @@ public class BrowserStackManager {
         {
             caps.setCapability("browserstack.ie.noFlash", "true");
         }
-        else if (browser.contains("firefox"))
-        {
 
-        }
         else if (browser.contains("safari"))
         {
             caps.setCapability("browserstack.safari.enablePopups", "true");
