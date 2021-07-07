@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.wikipedia.app.pages.BasePage;
 import org.wikipedia.app.pages.HomePage;
 import org.wikipedia.app.pages.SearchResultPage;
+import org.wikipedia.app.pages.WatchListPage;
 import org.wikipedia.app.support.WorldHelper;
 import org.wikipedia.app.utilities.Settings;
 
@@ -20,6 +21,7 @@ public class SearchSteps {
     private BasePage basePage;
     private HomePage landingPage;
     private SearchResultPage searchResultPage;
+    private WatchListPage watchListPage;
 
     public SearchSteps(WorldHelper helper){this.helper = helper;}
 
@@ -95,6 +97,53 @@ public class SearchSteps {
         englishLink = Settings.getTestConfig("english.link");
         searchResultPage.verifyLinkInEnglish(englishLink);
     }
+
+    @Given("^I navigate to coinmarket cap website$")
+    public void iNavigateToCoinmarketCapWebsite() throws Throwable {
+        landingPage = helper.getBasePage().goToHomePage();
+    }
+    @Given("^I login with the correct credentials$")
+    public void i_login_with_the_correct_credentials() throws Throwable {
+        helper.getWatchListPage().loginToCoinMarket();
+
+    }
+
+    @When("^I click on the star icon for the first five coins$")
+    public void i_click_on_the_star_icon_for_the_first_five_coins() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @Then("^the following coins are added the watchlist Bitcoin$")
+    public void the_following_coins_are_added_the_watchlist_Bitcoin() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @Then("^the following coins are added the watchlist Ethereum$")
+    public void the_following_coins_are_added_the_watchlist_Ethereum() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @Then("^the following coins are added the watchlist Tether$")
+    public void the_following_coins_are_added_the_watchlist_Tether() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @Then("^the following coins are added the watchlist Binance Coin$")
+    public void the_following_coins_are_added_the_watchlist_Binance_Coin() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @Then("^the following coins are added the watchlist Cardano$")
+    public void the_following_coins_are_added_the_watchlist_Cardano() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
 
 
 

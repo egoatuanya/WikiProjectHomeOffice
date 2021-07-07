@@ -6,6 +6,7 @@ import org.wikipedia.app.browsers.BrowserFactory;
 import org.wikipedia.app.pages.BasePage;
 import org.wikipedia.app.pages.HomePage;
 import org.wikipedia.app.pages.SearchResultPage;
+import org.wikipedia.app.pages.WatchListPage;
 
 public class WorldHelper {
 
@@ -13,6 +14,7 @@ public class WorldHelper {
     private static BasePage basePage = null;
     private static HomePage landingPage = null;
     private static SearchResultPage searchResultPage = null;
+    private static WatchListPage watchListPage = null;
 
 
     public  BasePage getBasePage(){
@@ -27,5 +29,9 @@ public class WorldHelper {
     public  SearchResultPage getSearchResultPage(){
         if(searchResultPage!= null) return searchResultPage;
         return PageFactory.initElements(driver, SearchResultPage.class);
+    }
+    public  WatchListPage getWatchListPage(){
+        if(watchListPage!= null) return watchListPage;
+        return PageFactory.initElements(driver, WatchListPage.class);
     }
 }

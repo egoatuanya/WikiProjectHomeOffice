@@ -19,4 +19,21 @@
       Then I should be able to search in a language different from "English"
       And I should be able to validate the results page includes a link to the version in "English"
 
+    Scenario: Navigate to coinmarket cap and add coins to the watchlist
+      Given I navigate to coinmarket cap website
+      And I login with the correct credentials
+      #When I click on the star icon for the first five coins
+      #Then the following coins are added the watchlist <coins>
+     # Examples:
+      #|coins|
+     # |Bitcoin|
+     # |Ethereum|
+      #|Tether|
+      #|Binance Coin|
+     # |Cardano|
+
+
+
+
+
 
